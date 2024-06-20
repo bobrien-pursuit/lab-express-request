@@ -11,5 +11,11 @@ app.get("/:verb/:adjective/:noun", (req, res) => {
     res.send(`Congratulations on starting a new project called ${verb}-${adjective}-${noun}\!`)
 })
 
+// HOMEPAGE
+app.get("/bugs", (req, res) => {
+
+    res.send(`99 little bugs in the code`);
+})
+
 // EXPORT
 module.exports = app;
