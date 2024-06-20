@@ -20,14 +20,19 @@ app.get("/bugs/", (req, res) => {
                 <a href="/bugs/101">pull one down, patch it around</a>`)
             
             });
+            
 app.get("/bugs/:num", (req, res) => {
    const { num } = req.params;
 
+   if (num >= 200) {
+    res.send(`<a href="/bugs/">Start Over</a>`)
+   }
+   else {
     res.send(`${num} little bugs left in the code
                 <br>
                 <br>
-                <a href="/bugs/${Number(num)}">pull one down, patch it around</a>`)     
-            
+                <a href="/bugs/${Number(num)+2}">pull one down, patch it around</a>`)     
+        }    
             });
 
 
