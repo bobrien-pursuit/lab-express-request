@@ -1,5 +1,7 @@
 //DEPENDENCIES
 const express = require("express");
+const pokemon = require("./models/pokemon.json");
+console.log(pokemon[0]);
 
 // CONFIGURATION
 const app = express();
@@ -20,7 +22,7 @@ app.get("/bugs/", (req, res) => {
                 <a href="/bugs/101">pull one down, patch it around</a>`)
             
             });
-            
+
 app.get("/bugs/:num", (req, res) => {
    const { num } = req.params;
 
@@ -34,7 +36,28 @@ app.get("/bugs/:num", (req, res) => {
                 <a href="/bugs/${Number(num)+2}">pull one down, patch it around</a>`)     
         }    
             });
+app.get("/pokemon/", (req, res) => {
 
+    res.send(pokemon);
+
+            });
+
+app.get("/pokemon/:indexOfArray", (req, res) => {
+    const { indexOfArray } = req.params;
+
+    if(indexOfArray > 0 && indexOfArray < pokemon.length - 1)
+            res.send(pokemon[indexOfArray].name);
+    else
+            res.send(`sorry, no pokemon found at /pokemon/${indexOfArray}`)
+
+})
+
+app.get("pokemon/:operator", (req, res) => {
+    const { name } = req.query;
+    const { operator } = req.params;
+    if (operator === "search") 
+        res.send(pokemon.find((foo) => foo[name] === pokemon[name]));
+})
 
 // EXPORT
 module.exports = app;
